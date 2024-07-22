@@ -20,6 +20,7 @@ export default function Component() {
     data?.generalSettings;
   const primaryMenu = data?.headerMenuItems?.nodes ?? [];
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
+  const posts = data?.posts?.nodes;
 
   return (
     <>
@@ -50,6 +51,19 @@ Component.query = gql`
     $headerLocation: MenuLocationEnum
     $footerLocation: MenuLocationEnum
   ) {
+    posts(first: 10) {
+      nodes {
+        title
+        excerpt
+        uri
+        categories {
+          nodes {
+            name
+            uri
+          }
+        }
+      }
+    }
     generalSettings {
       ...BlogInfoFragment
     }
