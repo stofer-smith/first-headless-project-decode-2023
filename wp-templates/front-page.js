@@ -9,6 +9,7 @@ import {
   NavigationMenu,
   Hero,
   SEO,
+  PostExcerpt,
 } from '../components';
 
 export default function Component() {
@@ -32,10 +33,11 @@ export default function Component() {
       />
       <Main>
         <Container>
-          <Hero title={'Front Page'} />
+          <Hero title={'Headless Demo'} />
           <div className="text-center">
-            <p>This page is utilizing the "front-page" WordPress template.</p>
-            <code>wp-templates/front-page.js</code>
+              {posts.map(post => {
+                return (<PostExcerpt post={post} key={post.title}></PostExcerpt>)
+              })}
           </div>
         </Container>
       </Main>
