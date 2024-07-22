@@ -11,6 +11,8 @@ import {
   ContentWrapper,
   FeaturedImage,
   SEO,
+  MusicResources,
+  FoodResources
 } from '../components';
 
 export default function Component(props) {
@@ -23,7 +25,9 @@ export default function Component(props) {
     props?.data?.generalSettings;
   const primaryMenu = props?.data?.headerMenuItems?.nodes ?? [];
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
-  const { title, content, featuredImage, date, author } = props.data.post;
+  const { title, content, featuredImage, date, author, sweetMixtape, foodResources, categories } = props.data.post;
+  const isFood = categories?.nodes.filter(category => category.name === 'Food').length > 0 ? true : false;
+  const isMusic = categories?.nodes.filter(category => category.name === 'Music').length > 0 ? true : false;
 
   return (
     <>
@@ -46,7 +50,22 @@ export default function Component(props) {
             author={author?.node?.name}
           />
           <Container>
-            <ContentWrapper content={content} />
+            <ContentWrapper content={content}>
+                {isFood ? 
+                (<FoodResources recipeName={foodResources.recipeName} recipeLink={foodResources.recipeLink}>
+                </FoodResources>) 
+                : null }
+
+
+                {isMusic ? 
+                
+                (<MusicResources 
+                    trackTitle={sweetMixtape.trackTitle}
+                    artist={sweetMixtape.artist}
+                    album={sweetMixtape.album}
+                ></MusicResources>)   
+                : null }
+            </ContentWrapper>
           </Container>
         </>
       </Main>
@@ -69,9 +88,23 @@ Component.query = gql`
       title
       content
       date
-      author {
-        node {
-          name
+        author {
+          node {
+             name
+          }
+      }
+      sweetMixtape {
+        album
+        artist
+        trackTitle
+      }
+      foodResources {
+        recipeLink
+        recipeName
+      }
+      categories {
+        nodes {
+            name
         }
       }
       ...FeaturedImageFragment

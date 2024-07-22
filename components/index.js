@@ -14,3 +14,5 @@ export { Hero } from './Hero';
 export { Post } from './Post';
 export { SEO } from './SEO';
 export { PostExcerpt } from './PostExcerpt';
+export { FoodResources } from './FoodResources';
+export { MusicResources } from './MusicResources';
