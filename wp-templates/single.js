@@ -56,14 +56,14 @@ export default function Component(props) {
                 </FoodResources>) 
                 : null }
 
-
                 {isMusic ? 
                 
                 (<MusicResources 
                     trackTitle={sweetMixtape.trackTitle}
                     artist={sweetMixtape.artist}
                     album={sweetMixtape.album}
-                ></MusicResources>)   
+                >                    
+                </MusicResources>)   
                 : null }
             </ContentWrapper>
           </Container>
